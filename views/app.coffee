@@ -19,5 +19,6 @@ Uploader =
 
   load: ->
     ($ '#meter').hide().find('span').css('width', 0)
+    ($ '#form')[0].reset()
 
 $ Uploader.init

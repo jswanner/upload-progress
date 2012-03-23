@@ -28,7 +28,8 @@
       }
     },
     load: function() {
-      return ($('#meter')).hide().find('span').css('width', 0);
+      ($('#meter')).hide().find('span').css('width', 0);
+      return ($('#form'))[0].reset();
     }
   };
 
