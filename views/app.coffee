@@ -18,6 +18,6 @@ class App
       ($ '#meter').show().find('span').css('width', "#{percentComplete.toFixed()}%")
 
   load: ->
-      ($ '#meter').hide().find('span').css('width', 0)
+    ($ '#meter').hide().find('span').css('width', 0)
 
 $ (new App).init
