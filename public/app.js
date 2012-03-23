@@ -1,19 +1,11 @@
 (function() {
-  var App,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var Uploader;
 
-  App = (function() {
-
-    function App() {
-      this.submit = __bind(this.submit, this);
-      this.init = __bind(this.init, this);
-    }
-
-    App.prototype.init = function() {
-      return ($('#form')).on('submit', this.submit);
-    };
-
-    App.prototype.submit = function() {
+  Uploader = {
+    init: function() {
+      return ($('#form')).on('submit', Uploader.submit);
+    },
+    submit: function() {
       var data, file, i, xhr, _len, _ref;
       data = new FormData;
       _ref = ($('#file'))[0].files;
@@ -22,29 +14,24 @@
         data.append("file" + i, file);
       }
       xhr = new XMLHttpRequest;
-      xhr.upload.addEventListener("progress", this.progress, false);
-      xhr.addEventListener("load", this.load, false);
+      xhr.upload.addEventListener("progress", Uploader.progress, false);
+      xhr.addEventListener("load", Uploader.load, false);
       xhr.open("POST", "/");
       xhr.send(data);
       return false;
-    };
-
-    App.prototype.progress = function(e) {
+    },
+    progress: function(e) {
       var percentComplete;
       if (e.lengthComputable) {
         percentComplete = (e.loaded / e.total) * 100;
         return ($('#meter')).show().find('span').css('width', "" + (percentComplete.toFixed()) + "%");
       }
-    };
-
-    App.prototype.load = function() {
+    },
+    load: function() {
       return ($('#meter')).hide().find('span').css('width', 0);
-    };
+    }
+  };
 
-    return App;
-
-  })();
-
-  $((new App).init);
+  $(Uploader.init);
 
 }).call(this);
